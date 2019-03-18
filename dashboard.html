@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link href="my.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/rowgroup/1.1.0/css/rowGroup.dataTables.min.css" rel="stylesheet">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- <style>
+        #Description {
+          white-space: pre-line;
+        }
+    </style> -->
+    <title>Register Profile Dashborad</title>
+
+</head>
+<body>
+    <h2 class="p-3 mb-2 bg-info text-white">
+        Register Profile
+    </h2>
+
+    <!-- <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">0x</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Base Address(Hex)" aria-label="Username" aria-describedby="basic-addon1" id="addr_input">
+    </div>
+
+    <div class="table-responsive-sm"> -->
+    <div class="card">
+      <div class="card-body">
+        <!-- <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        <button type="button" class="btn btn-primary" id="doc_btn">Register Profile</button>
+        <button type="button" class="btn btn-info" id="analyzer_btn">Register Analyzer</button>
+      </div>
+    </div>
+    <!-- <pre id='dummy_space'></pre> -->
+    <!-- <button type="button" class="btn btn-primary" id="doc_btn">Primary</button>
+    <button type="button" class="btn btn-info" id="analyzer_btn">Info</button> -->
+
+    <!-- <div class="column" style="padding-top:10px; display:none;" id='MyDataTables'> -->
+        <!--python table begin-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> my </th>
+                    <th> you </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> 100 </td>
+                    <td> 101 </td>
+                </tr>
+                <tr>
+                    <td> 150 </td>
+                    <td> 111 </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--python table end-->
+    <!-- </div> -->
+
+    <!--  -->
+
+    <div class='table-responsive-sm' id='analyzer' style="width: 90%; margin: 0 auto; display: none;">
+
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">0x</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Base Address(Hex)" aria-describedby="basic-addon1" id="addr_input">
+          </div>
+          <a class="card-text" id=info></a>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnHide" style="display: none;">Show Description</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="addColumn" style="display: none;">Add Colunm</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="RmColumn" style="display: none;">Remove Colunm</button>
+        </div>
+      </div>
+      <!-- <hr> -->
+
+      <table class='table table-sm' id='analyzerTable'>
+        <tbody>
+
+        </tbody>
+      </table>
+
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+    <!--DataTable js source-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.1.0/js/dataTables.rowGroup.min.js"></script>
+    <script src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.19/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+    <script src="my.js"></script>
+
+    <script>
+    // define columns for better maintenance
+        const columns = {
+          addr: 0,
+          name: 1,
+          blocks: 2,
+          msb: 3,
+          lsb: 4,
+          field_name: 5,
+          description: 6,
+          rw: 7,
+          default:8
+        }
+    // add class to "FIELD_NAME", contains 'RESERVED', to small the font size
+        function reserve (row, data, dataIndex ) {
+          if ( data[columns.field_name] == 'RESERVED' ) {
+            $(row).addClass('smallFont');
+          }
+        };
+
+        $(document).ready(function() {
+            document.body.setAttribute('spellcheck', false);
+            var table = $('#datatable').DataTable( {
+                "lengthMenu": [[16, 32, 64, -1], ['16', '32', '64', 'all']],
+                "ordering": false,
+                "searchHighlight": true,
+                "dom": '<f><l><p><t><p>',
+                "order": [[columns.blocks, 'asc'], [columns.addr, 'asc']],
+                "rowGroup": {
+                  startRender:function ( rows, group, level ) {
+                    if (level == 1) {
+                      // show addr (name) at row group level_1
+                      // eq(0) to get columns name
+                      return `${group} (${rows.data().eq(0)[columns.name]})`
+                    } else {
+                      return group
+                    }
+                  },
+                  dataSrc: [columns.blocks ,columns.addr]
+                },
+                "columnDefs": [{
+                  targets: [ columns.addr, columns.name, columns.blocks],
+                  // disable display in columns
+                  visible: false
+                }],
+                "createdRow": reserve
+            } );
+            // $('#addr_input').keyup( function() {
+            //   table.draw();
+            // } );
+            // $('#analyzer').hide()
+            $('#analyzer_btn').on('click', function (e) {
+              // Get the column API object
+                // console.log('click!!!!');
+              $('#datatable_wrapper').hide()
+              $('#analyzer').show()
+              // Toggle the visibility
+              //column.visible( ! column.visible() );
+            } );
+            $('#doc_btn').on('click', function (e) {
+              // Get the column API object
+                // console.log('click!!!!');
+              $('#analyzer').hide()
+              $('#datatable_wrapper').show()
+              // Toggle the visibility
+              //column.visible( ! column.visible() );
+            } );
+            var hide = false
+            var analyzerData = new Array();
+            var newColumns_cnt = 0;
+            $('#addr_input').on( 'keydown', function (e) {
+              // e.which == 13 stand for detect 'ENTER' was keyup
+              if(e.which == 13) {
+                let addr_input = $('#addr_input').val();
+                addr_input = addr_input.replace(/0x/gi, '').trim();
+                // var source = table.search(addr_input);
+                analyzerData = create_table(table, addr_input, columns, hide, newColumns_cnt);
+                if ( newColumns_cnt == 0) {
+                  newColumns_cnt = add_columns('analyzerTable', analyzerData, newColumns_cnt);
+                };
+                $('#btnHide').show();
+                $('#addColumn').show();
+                $('#RmColumn').show();
+              }
+            } );
+
+            $('#RmColumn').click(function () {
+              if ( newColumns_cnt > 0) {
+                remove_column('analyzerTable');
+                newColumns_cnt --;
+              };
+            });
+
+            $('#btnHide').click(function() {
+                hide_desp(hide)
+                hide = !hide
+                // console.log(hide)
+                if (hide) {
+                  document.getElementById('btnHide').innerHTML = 'Hide Description'
+                } else {
+                  document.getElementById('btnHide').innerHTML = 'Show Description'
+                };
+            });
+
+            $('#addColumn').click(function(){
+                newColumns_cnt = add_columns('analyzerTable', analyzerData, newColumns_cnt);
+            });
+
+
+        } ); // end of ready function
+    </script>
+</body>
+</html>
