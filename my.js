@@ -60,7 +60,7 @@ function create_table(source, key, columns, hide, newColumns_cnt) {
         row.setAttribute('class', 'smallFont');
       }
       cell.innerHTML = data_to_keep[i][ii].toString();
-      console.log(data_to_keep[i][ii].toString())
+      //console.log(data_to_keep[i][ii].toString())
     }
   }
   old_tbody = analyzerTable.tBodies[0]
@@ -170,14 +170,22 @@ function contenteditableCall(_class) {
   var $cell = $(`.${_class}`);
   // console.log(`$(.${_class})`);
   $cell.each(function () {
-    // console.log($(this));
-    $(this).keydown(function(e) {
+    $(this).on('keydown', function(e) {
         if(e.which == 13) {
-          setValueFromCell($(this));
-          e.preventDefault();
+          $(this).blur();
         }
-    })
-
+    });
+    // use focus to save initial text when enter
+    $(this).focus(function() {
+        $(this).data("initialText", $(this).html());
+    });
+    // when leave, check content is changed or not
+    $(this).blur(function() {
+        // ...if content is different...
+        if ($(this).data("initialText") !== $(this).html()) {
+            setValueFromCell($(this));
+        }
+    });
   });
 };
 
