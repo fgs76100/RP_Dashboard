@@ -5,14 +5,14 @@ import numpy as np
 import pandas as pd
 from htmltable import html
 
-# filelist = ['./DRAMS.xls', './MEM_SRAM_RegisterProfile_RL6537.xls']
-# addrlist = ['0x18005000', '0x18004000']
-filelist = ['chip_soc_index.xls']
-addrlist = ['0x18005000']
+filelist = ['./DRAMS.xls']
+addrlist = ['0x18145000']
+# filelist = ['chip_soc_index.xls']
+# addrlist = ['0x18005000']
 df = None
 for xls, addr in zip(filelist, addrlist):
     reader = RegisterProfileReader(xls_file=xls)
-    reader.read_index(module=False, offset=addr)
+    reader.read_index(module=True, offset=addr)
     reader.get_blocks()
     if df is None:
         df = reader.registers()
@@ -29,14 +29,43 @@ df = df.iloc[:, col_to_keep]
 df = df.replace('', np.nan)
 # print(df.to_string())
 df.columns = col_to_rename
+check = df['ADDR'].dropna()
+print(check.is_unique)
+print()
 df[['ADDR', 'NAME', 'BLOCK']] = df[['ADDR', 'NAME', 'BLOCK']].fillna(method='ffill')
 df = df.replace(np.nan, '')
 df.MSB = df['MSB'].apply(int)
 df.LSB = df['LSB'].apply(int)
-table = html()
-# print(df['ADDR'].is_unique)
-table.create_table(head=df.columns.values, table=df.values)
+# table = html()
+# #
+# table.create_table(head=df.columns.values, table=df.values)
 # print(table.get_table())
-# print(df.to_string())
+# df.set_index(['BLOCK', 'ADDR', 'NAME'], inplace=True)
+# block = pd.unique(df['BLOCK'])
+# addrs = pd.unique(df['ADDR'])
+# names = pd.unique(df['NAME'])
+# for addr, name in zip(addrs, names):
+#     selected = df.loc[(df['ADDR']==addr) & (df['NAME']==name)]
+#     print(selected)
+# df.to_json('database.json',
+#            orient='split',
+#            index=False
+#            )
+groupDict = df.groupby(['BLOCK', 'ADDR', 'NAME']).apply(
+    lambda g: g.drop(['BLOCK', 'ADDR', 'NAME'], axis=1).to_dict(orient='records')
+    ).to_dict()
 
+
+myjson = {}
+
+for key, items in groupDict.items():
+    block, addr, name = key
+    myjson.setdefault(block, [])
+    myjson[block].append(dict(address=addr, name=name,
+                              fields=items
+                              )
+                         )
+
+with open('database.json', 'w') as f:
+    f.write(json.dumps(myjson, indent=2))
 
