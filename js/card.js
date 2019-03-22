@@ -1,5 +1,5 @@
 // global 
-var tableData;
+//var tableData;
 
 // constructor
 function AnalyzerTable(num) {
@@ -366,37 +366,30 @@ function rmColumnBTN(id, table) {
 }
 
 $(document).ready(function () {
-  // var currentFields = {};
-  // $(`body`).sortable({cancel: ':input,button,[contenteditable], .card-body'});
+
   document.body.setAttribute('spellcheck', false);
-  // var tableData = {};
-  // console.log('loading');
-  // cardgroups = new cardGroups();
-  let url = 'https://raw.githubusercontent.com/fgs76100/RP_Dashboard/master/database.json';
-  httpRequest('get', url);  
+
   if (tableData === undefined) {
-    alert('Error!! The connection to server FAILED');
-    return false;
-  }
-  // table = new AnalyzerTable ('#analyzerTable0');
+        alert('Error!! The connection to server FAILED');
+        return false;
+  };
   var index = 0;
   for (var i = 0; i < 3; i++) {
     AddCard(i);
     index ++
   };
-  
+
   $('#add-card').click( function () {
     AddCard(index);
     index ++;
   });
-  
+
   $('#hide-all').click( function () {
     $('.card-body').slideUp();
-    
+
   });
-  
+
   $('#show-all').click( function () {
     $('.card-body').slideDown();
   });
-  
 });

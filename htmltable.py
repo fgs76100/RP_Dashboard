@@ -21,7 +21,7 @@ class html:
         self.tfoot = ''
         self.template = 'dashboard.html'
 
-    def create_table(self, head, table):
+    def create_table(self, head, table, project):
         header = ''
         col_scope = dict(scope='col')
         for each_head in head:
@@ -29,6 +29,7 @@ class html:
         header = self.wrap(text=header, wrap='tr')
         self.header = header
         pattern = re.compile(r'<!--python table begin-->\s(.*)\s*<!--python table end-->', re.DOTALL)
+        prj = re.compile(r'<!--python project begin-->\s(.*)\s*<!--python project end-->', re.DOTALL)
         done = ''
         body = ''
         for row in table:
@@ -37,15 +38,19 @@ class html:
                 cells += self.wrap(text=col, wrap='td',) + '\n'
             body += self.wrap(text=cells, wrap='tr') + '\n'
             # print(body)
-
+        my_project = '<span class="badge badge-pill badge-success">{0}</span>'.format(project)
         self.tbody = body
         with open(self.template, 'r') as f:
             context = f.read()
             # print(context)
+            prj_matches = prj.findall(context)
+            for match in prj_matches:
+                # print(match, my_project)
+                context = context.replace(match, my_project)
             matches = pattern.findall(context)
             for match in matches:
                 done = context.replace(match, self.get_table())
-        with open('register_dashboard.html', 'w', encoding='utf-8') as f:
+        with open('{}_RPD.html'.format(project), 'w', encoding='utf-8') as f:
             f.write(done)
 
     def get_table(self):
@@ -53,6 +58,7 @@ class html:
                                  tbody=self.tbody,
                                  tfoot=self.tfoot
                                  )
+
 
     @staticmethod
     def wrap(text, wrap, attribute=None):

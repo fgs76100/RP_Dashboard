@@ -18,14 +18,14 @@ class RegisterProfileReader:
         self.register_set = []
         self.col = []
 
-    def read_index(self, index='chip_index', module=False, offset=None):
+    def read_index(self, index='chip_index', module=False):
         if not module:
             col_to_read = ['NAME', 'OFFSET ADDR', 'NUMBER', 'DESCRIPTION', 'Belong to']
             col_to_exit = ['HISTORY', 'Revision History']
         else:
             col_to_read = ['REG_FILE', 'File list of registers in DATA_MUX (*.xml)']
             col_to_exit = ['', '']
-
+        offset = '0x0'
         with open_workbook(self.xls) as xls:
             if module:
                 module_name = xls.sheet_names()
@@ -38,7 +38,7 @@ class RegisterProfileReader:
                 read_en = False
                 for i in range(nrows):
                     cells = [x.value for x in index_sheet.row(i)]
-                    # print(cells)
+                    # print(cells[0])
                     if read_en:
                         if cells[0] == col_to_exit[0] and cells[1] == col_to_exit[1]:
                             break
@@ -54,6 +54,8 @@ class RegisterProfileReader:
                         continue
                     if cells[0] == col_to_read[0] and cells[1] == col_to_read[1]:
                         read_en = True
+                    if 'VERSION' in cells[0]:
+                        offset = cells[1]
                 if not read_en:
                     print('Warning!! {} column headers failed to locate.'.format(sheet))
         # print(self.mem_blocks)
@@ -111,6 +113,7 @@ class RegisterProfileReader:
                             lc = ['']
                             if mem_block != '':
                                 offset_addr = self.mem_blocks[mem_block][0]
+                                # print(offset_addr,  self.mem_blocks[mem_block][-1])
                                 addr = int(offset_addr, 16) + self.mem_blocks[mem_block][-1]
                                 save_block = mem_block
                                 addr = int(addr)
@@ -130,10 +133,12 @@ class RegisterProfileReader:
                             self.register_set.append(lc)
                             if int(lsb) == 0:
                                 # print(bit, num, lc)
+                                # print(lsb, num, lc)
                                 cnt = self.mem_blocks[save_block][-1]
                                 try:
                                     self.mem_blocks[save_block][-1] = cnt + (int(bit)/8) * (int(num) + 1)
                                 except ValueError:
+
                                     self.mem_blocks[save_block][-1] = cnt + 4
                             continue
                         if cells[0].lower() == col_to_read[0].lower() and cells[1].lower() == col_to_read[1].lower():

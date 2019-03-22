@@ -4,15 +4,25 @@ import json
 import numpy as np
 import pandas as pd
 from htmltable import html
+import os
 
-filelist = ['./DRAMS.xls']
-addrlist = ['0x18145000']
-# filelist = ['chip_soc_index.xls']
-# addrlist = ['0x18005000']
+
+
+
+project = 'RLE0947'
+
+filelist = os.listdir(project)
+
 df = None
-for xls, addr in zip(filelist, addrlist):
+
+for xls in filelist:
+    if '.xls' not in xls:
+        print('this {} type of file not support')
+        continue
+    xls = os.path.join(project, xls)
+    print('parsing {}'.format(xls))
     reader = RegisterProfileReader(xls_file=xls)
-    reader.read_index(module=True, offset=addr)
+    reader.read_index(module=True)
     reader.get_blocks()
     if df is None:
         df = reader.registers()
@@ -66,6 +76,8 @@ for key, items in groupDict.items():
                               )
                          )
 
-with open('database.json', 'w') as f:
-    f.write(json.dumps(myjson, indent=2))
+with open('database.js', 'w') as f:
+    f.write('var tableData = ')
+    f.write(json.dumps(myjson))
+    f.write(';')
 

@@ -27,7 +27,9 @@
     <h2 class="p-3 mb-2 bg-info text-white">
         Register Profile
         <span class="badge badge-pill badge-warning">MEMCTRL_DFI</span>
+        <!--python project begin-->
         <span class="badge badge-pill badge-success">RTL9330</span>
+        <!--python project end-->
     </h2>
 
     <!-- <div class="input-group mb-3">
@@ -193,7 +195,7 @@
               // e.which == 13 stand for detect 'ENTER' was keyup
               if(e.which == 13) {
                 let addr_input = $('#addr_input').val();
-                addr_input = addr_input.replace(/0x/gi, '').trim();
+                addr_input = addr_input.replace(/0x/gi, '').trim().toUpperCase();
                 // var source = table.search(addr_input);
                 analyzerData = create_table(table, addr_input, columns, hide, newColumns_cnt);
                 if ( newColumns_cnt == 0) {
