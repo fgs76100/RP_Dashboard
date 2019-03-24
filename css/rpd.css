@@ -3,17 +3,7 @@ td {
    font-size: 95%;
 }
 
-/* table#datatable.dataTable tbody tr:hover {
-  background-color: #ffa;
-} */
-
-/* table#datatable.dataTable tbody tr:hover {
-  background-color: #ffa;
-} */
-
 .smallFont {
-  /* background-color: #f0aaaa !important; */
-  /* height: 20px; */
   font-size: 60%;
   color: lightgray;
 }
@@ -29,13 +19,11 @@ td {
   font-size: 100%;
   font-weight: normal;
   text-indent: 20px;
-  /* font-family: times; */
 }
 
 .ui-autocomplete {
   max-height: 300px;
   overflow-y: auto;
-  /* prevent horizontal scrollbar */
   overflow-x: hidden;
   position: absolute;
   top: 100%;
@@ -90,12 +78,6 @@ td {
   display: none;
 }
 
-/* #ip-list {
-  padding: 10px 0 10px 0 ;
-} */
-
-
-
 #navbar {
   padding: 15px 0 0 0;
 }
@@ -132,17 +114,3 @@ li.page-info {
   width: 300;
   height: 400;
 };
-
-/* #card-ip{
-  padding: 0 0 10px
-} */
-
-/* style="width: 90%; margin: 0 auto; padding: 10px 0 0 0" */
-
-/* #info {
-  padding-right:20px;
-} */
-
-/* #btnHide {
-  padding-left:20px;
-} */
