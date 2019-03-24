@@ -3,11 +3,7 @@
 //var tableData;
 // constructor
 // console.log(tableData);
-var project = tableData['project'];
-var top_module = tableData['top_module'];
 
-delete tableData['project'];
-delete tableData['top_module'];
 
 function AnalyzerTable(num) {
   this.id = `#analyzerTable${num}`;
@@ -734,6 +730,13 @@ $(document).ready(function () {
         alert('Error!! Data source is unavailable');
         return false;
   };
+  
+  var project = tableData['project'];
+  var top_module = tableData['top_module'];
+  
+  delete tableData['project'];
+  delete tableData['top_module'];
+  
   var ipList = Object.getOwnPropertyNames(tableData);
   creatIPList(ipList);
   $('#project').text(project);
