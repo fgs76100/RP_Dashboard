@@ -18,7 +18,7 @@ class RegisterProfileReader:
         self.register_set = []
         self.col = []
 
-    def read_index(self, index='chip_index', module=False):
+    def read_index(self, index='chip_index', module=False, addr_offset=None):
         if not module:
             col_to_read = ['NAME', 'OFFSET ADDR', 'NUMBER', 'DESCRIPTION', 'Belong to']
             col_to_exit = ['HISTORY', 'Revision History']
@@ -33,6 +33,7 @@ class RegisterProfileReader:
             else:
                 sheets = [index]
             for sheet in sheets:
+                # print(xls.sheet_names())
                 index_sheet = xls.sheet_by_name(sheet)
                 nrows = index_sheet.nrows
                 read_en = False
@@ -54,8 +55,11 @@ class RegisterProfileReader:
                         continue
                     if cells[0] == col_to_read[0] and cells[1] == col_to_read[1]:
                         read_en = True
-                    if 'VERSION' in cells[0]:
+                    if 'VERSION' in cells[0] and module:
                         offset = cells[1]
+                        if addr_offset is not None:
+                            offset = addr_offset
+
                 if not read_en:
                     print('Warning!! {} column headers failed to locate.'.format(sheet))
         # print(self.mem_blocks)
@@ -393,4 +397,3 @@ if __name__ == '__main__':
     writer.read_file()
     writer.create_mode_sheet()
     writer.create_file_sheet()
-

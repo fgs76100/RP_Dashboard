@@ -1,5 +1,6 @@
 td {
    white-space: pre-line;
+   font-size: 95%;
 }
 
 /* table#datatable.dataTable tbody tr:hover {
@@ -13,29 +14,130 @@ td {
 .smallFont {
   /* background-color: #f0aaaa !important; */
   /* height: 20px; */
-  font-size: 5px;
+  font-size: 60%;
   color: lightgray;
 }
 
-table.dataTable span.highlight {
-  background-color: #FFFF88;
-  border-radius: 0.28571429rem;
-
+.block_header {
+  font-size: 110%;
+  font-weight: bold;
+  
 }
 
-table.dataTable span.column_highlight {
-  background-color: #ffcc99;
-  border-radius: 0.28571429rem;
+.register_header {
+  background-color: #e6e6e6;
+  font-size: 100%;
+  font-weight: normal;
+  text-indent: 20px;
+  /* font-family: times; */
 }
 
-div.dataTables_wrapper {
-  margin: 0 auto;
-  width: 90%;
-  padding-top: 10px
-  /* display: none; */
+.ui-autocomplete {
+  max-height: 300px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
 }
 
+.ui-menu-item-wrapper {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #555555;
+  white-space: nowrap;
+}
 
+.ui-state-hover, .ui-state-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #17a2b8;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  background-image: none;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
+/* #ip-list {
+  padding: 10px 0 10px 0 ;
+} */
+
+
+
+#navbar {
+  padding: 15px 0 0 0;
+}
+
+.nav-link {
+  font-size: 90%
+}
+
+.searchHighlight {
+  background-color: #ffffcc;
+}
+
+p.my-select {
+  padding: 0 5px 0 0;
+}
+li.page-info {
+  padding: 6px 6px 0 6px;
+  text-align: center;
+}
+
+#cardgroup {
+  display: none;
+}
+
+.card-nav {
+  display: none;
+}
+
+.ip-list-input {
+  padding: 10px 0 0 0;
+}
+
+#myChart {
+  width: 300;
+  height: 400;
+};
+
+/* #card-ip{
+  padding: 0 0 10px
+} */
+
+/* style="width: 90%; margin: 0 auto; padding: 10px 0 0 0" */
 
 /* #info {
   padding-right:20px;
