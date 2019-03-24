@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-
+import json
 
 class html:
     def __init__(self):
@@ -70,19 +70,20 @@ class html:
         return '<{wrap}{attr}> {text} </{wrap}>'.format(wrap=wrap, text=text, attr=attr)
         # else:
         #     return '<{wrap}> {text} </{wrap}>'.format(wrap=wrap, text=text, attr=attr)
+    @staticmethod
+    def gen_js_script(from_dict, template, write_as):
+        pattern = re.compile(r'//python gen js start\s(.*)\s*//python gen js end', re.DOTALL)
+        content = ''
+        myjson = 'var tableData = {0};\n'.format(json.dumps(from_dict))
 
+        with open(template, 'r') as f:
+            content = f.read()
+        match = pattern.findall(content)
 
+        for each_match in match:
 
+            content = content.replace(each_match, myjson)
 
-
-
-
-
-
-
-
-
-
-
-
+        with open(write_as, 'w') as f:
+            f.write(content)
 
