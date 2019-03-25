@@ -773,7 +773,7 @@ $(document).ready(function () {
   reg_profile.slicing(currentIPList, reg_profile.data);
   reg_profile.createTable(currentEntry, reg_profile.data);
   var last = reg_profile.lastEntry;
-  var all = reg_profile.lastEntry;
+  //  var all = reg_profile.lastEntry;
   last = parseInt(last);
   
   //--- jquery selector
@@ -822,7 +822,7 @@ $(document).ready(function () {
     
     let newEntry = $(this).find("option:selected").text();
     if (newEntry === 'All') {
-      newEntry = all;
+      newEntry = totalRegister;
     } else {
       newEntry = parseInt(newEntry);
     };
