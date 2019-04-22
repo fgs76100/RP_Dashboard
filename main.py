@@ -5,23 +5,40 @@ import numpy as np
 import pandas as pd
 from htmltable import html
 import os
+import argparse
 
-top_module = 'SOC'
-project = 'RL6608'
+parser = argparse.ArgumentParser(description='')
+parser.add_argument('-project', '--p', dest='project', default=None, required=True)
+parser.add_argument('-module_name', '--mn', dest='module_name', default='top', required=True)
+parser.add_argument('-no_index', '--ni', dest='no_index', default=False, action='store_true')
+parser.add_argument('-dir', '--d', dest='dir', default='')
+
+args = parser.parse_args()
+print(args)
+top_module = args.module_name.upper()
 
 
-filelist = ['chip_soc_index.xls']
-module = False
+
+project = args.project
+
+if args.dir != '':
+    project_dir = args.dir
+else:
+    project_dir = args.project
+
+
+filelist = os.listdir(project_dir)
+module = args.no_index
 df = None
 
 for xls in filelist:
     if '.xls' not in xls:
         print('this {} type of file not support\n Current Only support xls :P')
         continue
-    xls = os.path.join(project, xls)
+    xls = os.path.join(project_dir, xls)
     print('parsing {}'.format(xls))
     reader = RegisterProfileReader(xls_file=xls)
-    reader.read_index(module=module, addr_offset='0x18145000')
+    reader.read_index(module=module)
     reader.get_blocks()
     if df is None:
         df = reader.registers()
@@ -70,3 +87,4 @@ for key, items in groupDict.items():
 #     f.write(';')
 #     # print(json.dumps(myjson, indent=2))
 html.gen_js_script(myjson, './template.html', '{0}_{1}.html'.format(top_module, project))
+# print('')

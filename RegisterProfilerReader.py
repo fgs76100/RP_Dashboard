@@ -47,6 +47,7 @@ class RegisterProfileReader:
                         cells.append(0)
                         if not module:
                             self.mem_blocks[cells[0]] = cells[1:]
+                            # print(cells)
                         else:
                             name = cells[1].replace('.xml', '').replace('file_', '')
                             value = [offset, ]
@@ -92,9 +93,12 @@ class RegisterProfileReader:
         if self.blocks is None:
             self.blocks = self.mem_blocks.keys()
         save_block = None
+        # print(self.blocks)
         for each_block in self.blocks:
             # print(each_block, self.mem_blocks[each_block])
             read_en = False
+            if each_block == '':
+                continue
             with open_workbook(self.xls) as xls:
                 try:
                     sheet = xls.sheet_by_name('file_{0}'.format(each_block))

@@ -52,7 +52,7 @@ class html:
                 done = context.replace(match, self.get_table())
         with open('{}_RPD.html'.format(project), 'w', encoding='utf-8') as f:
             f.write(done)
-
+        print('{}_RPD.html generated successfully'.format(project))
     def get_table(self):
         return self.table.format(header=self.header,
                                  tbody=self.tbody,
@@ -87,3 +87,4 @@ class html:
         with open(write_as, 'w') as f:
             f.write(content)
 
+        print('{} generated successfully'.format(write_as))
